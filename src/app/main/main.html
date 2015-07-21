@@ -3,7 +3,61 @@
   <div>
     <acme-navbar creationDate="main.creationDate" />
   </div>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped" st-pipe="main.callServer" st-table="main.displayed">
+      <thead>
+        <th st-sort="id">#</th>
+        <th st-sort="name">Name</th>
+        <th st-sort="tenantId">TenantId</th>
+        <th>Db</th>
+        <th>Server</th>
+        <th>Tag</th>
+        <th>Created</th>
+        <th>Active</th>
+        <th>Actions</th>
+      </thead>
+      <tbody class="table-hover" ng-show="!main.isLoading">
+        <tr  ng-repeat="tenant in main.displayed">
+          <td>{{tenant.id}}</td>
+          <td>{{tenant.name}}</td>
+          <td>{{tenant.tenantId}}</td>
+          <td>
+            {{tenant.db.hostname}}
+            <br />
+            {{tenant.db.name}}
+            <!--<br />-->
+            <!--{{tenant.db.user}}-->
+          </td>
+          <td>
+            {{tenant.server.name}}
+            <br />
+            {{tenant.server.ip}}
+          </td>
+          <td>{{tenant.tag}}</td>
+          <td>{{tenant.createdDate}}</td>
+          <td>{{tenant.active}}</td>
+          <td>
+            <a href="#">Edit</a>
+          </td>
+        </tr>
+      </tbody>
+      <tbody ng-show="main.isLoading">
+        <tr>
+          <td colspan="9" class="text-center">Loading ... </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="9" class="text-center">
+            <div st-items-by-page="10" st-pagination="" st-template="app/components/pagination/paging.html"></div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
 
+  </div>
+
+  <!--
   <div class="jumbotron text-center">
     <h1>'Allo, 'Allo!</h1>
     <p class="lead">
@@ -30,5 +84,7 @@
       </div>
     </div>
   </div>
+
+  -->
 
 </div>

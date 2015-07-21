@@ -6,13 +6,15 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr) {
+  function MainController($timeout, webDevTec, toastr, megamind) {
     var vm = this;
 
     vm.awesomeThings = [];
     vm.classAnimation = '';
     vm.creationDate = 1437434702412;
     vm.showToastr = showToastr;
+
+    vm.displayed = [];
 
     activate();
 
@@ -35,5 +37,19 @@
         awesomeThing.rank = Math.random();
       });
     }
+
+    vm.callServer = function (tableState) {
+      vm.isLoading = true;
+      var pagination = tableState.pagination;
+
+      var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
+      var number = pagination.number || 10;  // Number of entries showed per page.
+
+      megamind.getPage(start, number, tableState).then(function (result) {
+        vm.displayed = result.data;
+        tableState.pagination.numberOfPages = result.numberOfPages;//set the number of pages so the pagination can update
+        vm.isLoading = false;
+      });
+    };
   }
 })();

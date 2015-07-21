@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('webupdateNg', ['ngResource', 'ui.router', 'mgcrea.ngStrap']);
+    .module('webupdateNg', ['ngResource', 'ui.router', 'smart-table', 'mgcrea.ngStrap']);
 
 })();
