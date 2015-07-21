@@ -18,8 +18,7 @@
 
     // Enable breadcrumb
     $breadcrumbProvider.setOptions({
-      prefixStateName: 'home',
-      template: 'bootstrap3'
+      prefixStateName: 'home'
     });
   }
 

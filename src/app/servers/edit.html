@@ -1,0 +1,38 @@
+<form class="form-horizontal">
+  <fieldset>
+    <legend>APP Certificate</legend>
+    <div class="form-group" ng-if="ctrl.server.id != null">
+      <label class="col-sm-2 control-label">ID</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">{{ctrl.server.id}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Name: </label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="name" id="name" maxlength="255" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ip" class="col-sm-2 control-label">IP: </label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="ip" id="ip" maxlength="255" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="active" class="col-sm-2 control-label">Status: </label>
+      <div class="col-sm-10">
+        <input type="hidden" class="form-control" name="active" value="0" />
+        <input type="checkbox" class="form-control" name="active" id="active" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">&nbsp;</label>
+      <div class="col-sm-10">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="reset">Reset</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+

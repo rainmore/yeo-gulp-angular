@@ -3,30 +3,26 @@
 
   angular
     .module('webupdateNg')
-    .controller('EditController', EditController);
+    .controller('ServersListController', ServersListController);
 
   /** @ngInject */
-  function EditController($stateParams, $timeout, webDevTec, toastr, megamind) {
+  function ServersListController($timeout, serversService) {
     var vm = this;
 
-    vm.tenant = null;
+    vm.servers = [];
 
-    console.log($stateParams);
-
-    vm.callServer = function (tableState) {
+    vm.getPage = function (tableState) {
       vm.isLoading = true;
       var pagination = tableState.pagination;
 
       var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
       var number = pagination.number || 10;  // Number of entries showed per page.
 
-      megamind.getPage(start, number, tableState).then(function (result) {
-        vm.displayed = result.data;
+      serversService.getPage(start, number, tableState).then(function (result) {
+        vm.servers = result.data;
         tableState.pagination.numberOfPages = result.numberOfPages;//set the number of pages so the pagination can update
         vm.isLoading = false;
       });
     };
-
-
   }
-})(console);
+})();

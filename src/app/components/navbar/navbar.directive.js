@@ -6,7 +6,7 @@
     .directive('acmeNavbar', acmeNavbar);
 
   /** @ngInject */
-  function acmeNavbar() {
+  function acmeNavbar(tenantsService) {
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/navbar/navbar.html',
@@ -26,6 +26,10 @@
 
       // "vm.creation" is avaible by directive option "bindToController: true"
       vm.relativeDate = moment(vm.creationDate).fromNow();
+
+      vm.refrashTenants = function() {
+        tenantsService.refresh();
+      };
     }
   }
 

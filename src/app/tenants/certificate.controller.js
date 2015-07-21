@@ -6,7 +6,7 @@
     .controller('TenantsCertificateController', TenantsCertificateController);
 
   /** @ngInject */
-  function TenantsCertificateController($stateParams, $timeout, webDevTec, toastr, megamind) {
+  function TenantsCertificateController($stateParams, $timeout, toastr, tenantsService) {
     var vm = this;
 
     vm.tenant = null;
@@ -22,11 +22,11 @@
 
     function getTenant() {
       vm.isLoading = true;
-      megamind.getTenantById($stateParams.id).then(function (result) {
+      tenantsService.findOne($stateParams.id).then(function (result) {
         vm.tenant = result.data;
         vm.isLoading = false;
       });
     }
 
   }
-})(console);
+})();

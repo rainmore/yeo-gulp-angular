@@ -1,37 +1,27 @@
-<div class="container">
-
-  <div>
-    <acme-navbar creationDate="ctrl.creationDate" />
-  </div>
-
-  <div class="well" ncy-breadcrumb></div>
-
-
-  <form class="form-horizontal">
-    <fieldset>
-      <legend>APP Certificate</legend>
-  {{ctrl.getTenant()}}
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Build</label>
-        <div class="col-sm-10">
-          <p class="form-control-static">Server: {{ctrl.tenant.server}}</p>
-          <p class="form-control-static">Name: {{ctrl.tenant.name}}</p>
-        </div>
+<form class="form-horizontal">
+  <fieldset>
+    <legend>APP Certificate</legend>
+{{ctrl.getTenant()}}
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Build</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">Server: {{ctrl.tenant.server}}</p>
+        <p class="form-control-static">Name: {{ctrl.tenant.name}}</p>
       </div>
-      <div class="form-group">
-        <label for="certificate" class="col-sm-2 control-label">Certificate: </label>
-        <div class="col-sm-10">
-          <textarea type="text" class="form-control" name="certificate" id="certificate" required></textarea>
-        </div>
+    </div>
+    <div class="form-group">
+      <label for="certificate" class="col-sm-2 control-label">Certificate: </label>
+      <div class="col-sm-10">
+        <textarea type="text" class="form-control" name="certificate" id="certificate" required></textarea>
       </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">&nbsp;</label>
-        <div class="col-sm-10">
-          <button class="btn btn-primary" type="submit">Save</button>
-          <button class="btn btn-primary" type="reset">Reset</button>
-        </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">&nbsp;</label>
+      <div class="col-sm-10">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="reset">Reset</button>
       </div>
-    </fieldset>
-  </form>
+    </div>
+  </fieldset>
+</form>
 
-</div>

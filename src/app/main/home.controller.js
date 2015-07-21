@@ -3,10 +3,10 @@
 
   angular
     .module('webupdateNg')
-    .controller('MainController', MainController);
+    .controller('HomeController', HomeController);
 
   /** @ngInject */
-  function MainController($timeout) {
+  function HomeController($timeout) {
     var vm = this;
   }
 })();
