@@ -93,6 +93,25 @@
 
       return deferred.promise;
     };
+
+    this.getTenantById = function(id) {
+      var deferred = $q.defer();
+
+      var filtered = $filter('filter')(randomsItems, function(tenant) {
+        return tenant.id === parseInt(id);
+      });
+
+      var result = (filtered.length === 1) ? filtered[0] : null;
+
+      $timeout(function () {
+        //note, the server passes the information about the data set size
+        deferred.resolve({
+          data: result
+        });
+      }, 150);
+
+      return deferred.promise;
+    };
   }
 
 })();

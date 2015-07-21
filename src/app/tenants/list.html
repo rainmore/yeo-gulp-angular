@@ -5,8 +5,9 @@
 
   <div class="well" ncy-breadcrumb></div>
 
+
   <div class="table-responsive">
-    <table class="table table-hover table-striped" st-pipe="main.callServer" st-table="main.displayed">
+    <table class="table table-hover table-striped" st-pipe="ctrl.callServer" st-table="ctrl.displayed">
       <thead>
         <th st-sort="id">#</th>
         <th st-sort="name">Name</th>
@@ -18,8 +19,8 @@
         <th>Active</th>
         <th>Actions</th>
       </thead>
-      <tbody class="table-hover" ng-show="!main.isLoading">
-        <tr  ng-repeat="tenant in main.displayed">
+      <tbody class="table-hover" ng-show="!ctrl.isLoading">
+        <tr  ng-repeat="tenant in ctrl.displayed">
           <td>{{tenant.id}}</td>
           <td>{{tenant.name}}</td>
           <td>{{tenant.tenantId}}</td>
@@ -39,12 +40,11 @@
           <td>{{tenant.createdDate}}</td>
           <td>{{tenant.active}}</td>
           <td>
-            <a href="#">View</a>
-            <a href="#">Certificate</a>
+            <a ng-href="#/tenants/{{tenant.id}}/certificate">Certificate</a>
           </td>
         </tr>
       </tbody>
-      <tbody ng-show="main.isLoading">
+      <tbody ng-show="ctrl.isLoading">
         <tr>
           <td colspan="9" class="text-center">Loading ... </td>
         </tr>
@@ -67,8 +67,8 @@
       <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
       Always a pleasure scaffolding your apps.
     </p>
-    <p class="animated infinite" ng-class="main.classAnimation">
-      <button type="button" class="btn btn-lg btn-success" ng-click="main.showToastr()">Splendid Toastr</button>
+    <p class="animated infinite" ng-class="ctrl.classAnimation">
+      <button type="button" class="btn btn-lg btn-success" ng-click="ctrl.showToastr()">Splendid Toastr</button>
     </p>
     <p>
       With ♥ thanks to the contributions of<acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']" />
@@ -76,7 +76,7 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-6 col-md-4" ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
+    <div class="col-sm-6 col-md-4" ng-repeat="awesomeThing in ctrl.awesomeThings | orderBy:'rank'">
       <div class="thumbnail">
         <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}">
         <div class="caption">
