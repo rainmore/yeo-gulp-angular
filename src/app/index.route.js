@@ -36,6 +36,16 @@
           label: 'Edit Cluster'
         }
       })
+      .state('clustersAdd', {
+        url: '/clusters/add',
+        templateUrl: 'app/clusters/edit.html',
+        controller: 'ClusterEditController',
+        controllerAs: 'ctrl',
+        ncyBreadcrumb: {
+          parent: 'clusters',
+          label: 'Add Cluster'
+        }
+      })
       .state('servers', {
         url: '/servers',
         templateUrl: 'app/servers/list.html',

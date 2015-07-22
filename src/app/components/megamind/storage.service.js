@@ -53,11 +53,10 @@
       var deferred = $q.defer();
 
       if (item.id === null) {
-        item.id = list.length;
+        item.id = list.length + 1;
         list.push(item);
       }
       else {
-        var isNew = self.findById(item.id, list) === null;
         for(var i = 0; i < list.length; i++) {
           if (list[i].id === item.id) {
             list[i] = item;
@@ -79,7 +78,7 @@
 
     //fake call to the server, normally this service would serialize table state to send it to the server (with query parameters for example) and parse the response
     //in our case, it actually performs the logic which would happened in the server
-    this.getPage = function (start, number, params, data) {
+    this.findPage = function (start, number, params, data) {
 
       var deferred = $q.defer();
 
@@ -99,6 +98,18 @@
         });
       }, 1000);
 
+
+      return deferred.promise;
+    };
+
+    this.fakeDeffer = function (data) {
+      var deferred = $q.defer();
+      $timeout(function () {
+        //note, the server passes the information about the data set size
+        deferred.resolve({
+          data: data
+        });
+      }, 150);
 
       return deferred.promise;
     };

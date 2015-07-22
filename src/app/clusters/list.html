@@ -5,7 +5,7 @@
       <th st-sort="name">Name</th>
       <th st-sort="tenantId">Zone</th>
       <th>Created</th>
-      <th>Actions</th>
+      <th><a ng-href="#/clusters/add" title="Add"><i class="fa fa-plus fa-lg"></i></a></th>
     </thead>
     <tbody class="table-hover" ng-show="!ctrl.isLoading">
       <tr ng-repeat="cluster in ctrl.clusters">
@@ -14,7 +14,7 @@
         <td>{{cluster.zone}}</td>
         <td>{{cluster.createdDate}}</td>
         <td>
-          <a ng-href="#/clusters/{{cluster.id}}">Edit</a>
+          <a ng-href="#/clusters/{{cluster.id}}" title="Edit"><i class="fa fa-edit fa-lg"></i></a>
         </td>
       </tr>
     </tbody>
@@ -23,7 +23,7 @@
         <td colspan="9" class="text-center">Loading ... </td>
       </tr>
     </tbody>
-    <tfoot>
+    <tfoot ng-show="!ctrl.isLoading">
       <tr>
         <td colspan="9" class="text-center">
           <div st-items-by-page="10" st-pagination="" st-template="app/components/pagination/paging.html"></div>

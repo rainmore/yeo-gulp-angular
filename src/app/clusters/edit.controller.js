@@ -9,42 +9,44 @@
   function ClusterEditController($stateParams, $timeout, toastr, clustersService) {
     var vm = this;
 
-    vm.cluster = null;
+    vm.data       = null;
+    vm.origin = null;
     vm.zones = [];
 
-
-    activate();
-
-    function activate() {
-      get();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
-    }
-
-    function get() {
+    function init() {
       vm.isLoading = true;
 
       clustersService.getZones().then(function (result) {
         vm.zones = result.data;
       });
 
-      clustersService.findOne($stateParams.id).then(function (result) {
-        vm.cluster = result.data;
-        vm.isLoading = false;
-      });
+      if ($stateParams.id === undefined) {
+        clustersService.getEmpty().then(function (result) {
+          vm.data = result.data;
+          vm.origin = angular.copy(vm.data);
+          vm.isLoading = false;
+        });
+      }
+      else {
+        clustersService.findOne($stateParams.id).then(function (result) {
+          vm.data = result.data;
+          vm.origin = angular.copy(vm.data);
+          vm.isLoading = false;
+        });
+      }
     }
+
+    init();
 
     vm.save = function(clutser) {
       clustersService.save(clutser).then(function(result) {
-        vm.clutser = result.item;
-
-        console.log(result.item, result.list);
+        vm.data = result.item;
+        vm.origin = angular.copy(vm.data);
       });
     };
 
-    vm.reset = function(clutser) {
-      
+    vm.reset = function() {
+      vm.data = angular.copy(vm.origin);
     };
 
   }
