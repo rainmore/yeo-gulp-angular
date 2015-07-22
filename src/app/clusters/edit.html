@@ -1,0 +1,33 @@
+<form class="form-horizontal">
+  <fieldset>
+    <legend>APP Certificate</legend>
+    <div class="form-group" ng-if="ctrl.server.id != null">
+      <label class="col-sm-2 control-label">ID</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">{{ctrl.server.id}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Name: </label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" ng-model="ctrl.cluster.name" id="name" maxlength="255" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="zone" class="col-sm-2 control-label">Zone: </label>
+      <div class="col-sm-10">
+        <select id="zone" required class="form-control" ng-options="item for item in ctrl.zones" ng-model="ctrl.cluster.zone">
+          <option value="">-- Select Zone --</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">&nbsp;</label>
+      <div class="col-sm-10">
+        <button class="btn btn-primary" ng-click="ctrl.save(ctrl.cluster)">Save</button>
+        <button class="btn btn-primary" type="reset">Reset</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+

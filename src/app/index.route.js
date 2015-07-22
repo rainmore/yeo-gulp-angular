@@ -17,6 +17,25 @@
           label: 'Home'
         }
       })
+      .state('clusters', {
+        url: '/clusters',
+        templateUrl: 'app/clusters/list.html',
+        controller: 'ClustersListController',
+        controllerAs: 'ctrl',
+        ncyBreadcrumb: {
+          label: 'Clusters'
+        }
+      })
+      .state('clustersEdit', {
+        url: '/clusters/{id:int}',
+        templateUrl: 'app/clusters/edit.html',
+        controller: 'ClusterEditController',
+        controllerAs: 'ctrl',
+        ncyBreadcrumb: {
+          parent: 'clusters',
+          label: 'Edit Cluster'
+        }
+      })
       .state('servers', {
         url: '/servers',
         templateUrl: 'app/servers/list.html',

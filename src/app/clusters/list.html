@@ -1,0 +1,34 @@
+<div class="table-responsive">
+  <table class="table table-hover table-striped" st-pipe="ctrl.getPage" st-table="ctrl.displayed">
+    <thead>
+      <th st-sort="id">#</th>
+      <th st-sort="name">Name</th>
+      <th st-sort="tenantId">Zone</th>
+      <th>Created</th>
+      <th>Actions</th>
+    </thead>
+    <tbody class="table-hover" ng-show="!ctrl.isLoading">
+      <tr ng-repeat="cluster in ctrl.clusters">
+        <td>{{cluster.id}}</td>
+        <td>{{cluster.name}}</td>
+        <td>{{cluster.zone}}</td>
+        <td>{{cluster.createdDate}}</td>
+        <td>
+          <a ng-href="#/clusters/{{cluster.id}}">Edit</a>
+        </td>
+      </tr>
+    </tbody>
+    <tbody ng-show="ctrl.isLoading">
+      <tr>
+        <td colspan="9" class="text-center">Loading ... </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="9" class="text-center">
+          <div st-items-by-page="10" st-pagination="" st-template="app/components/pagination/paging.html"></div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

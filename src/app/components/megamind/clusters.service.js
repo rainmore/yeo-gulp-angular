@@ -3,50 +3,56 @@
 
   angular
     .module('webupdateNg')
-    .service('serversService', serversService);
+    .service('clustersService', clustersService);
 
   /** @ngInject */
-  function serversService($q, $filter, $timeout, clustersService, loremIpsumService)  {
-  	var self = this;
-    var roles = ["Application", "Chancellor", "Database", "Steward"];
-  	var data = [];
+  function clustersService($q, $filter, $timeout, storageService)  {
+    var self = this;
+    var data = [];
+    var zones = ["ap-southeast-1", "ap-southeast-2", "eu-central-1", "us-west-1"];
 
-    var random = function(id) {
-      var name = loremIpsumService.randomItemFromArray(['AU', 'US', 'EU', 'ASIA']);
-    	name += loremIpsumService.randomItemFromArray([1, 2, 3, 4, 5]);
-    	var role = loremIpsumService.randomItemFromArray(roles);
+    var random = function(zone, id) {
+      var name = zone.substring(0, 5).toUpperCase();
 
       return {
         'id': id,
-        'active': loremIpsumService.randomBoolean(),
         'name': name,
-        'role': role,
-        'ip': name,
-        'type': 'EC2',
-         'az': loremIpsumService.randomItemFromArray(['a', 'b']),
+        'zone': zone,
         'createdDate': new Date()
-      };;
+      }
     };
 
-    for (var i = 1; i <= 10; i++) {
-      data.push(random(i));
+    for (var i = 0; i < zones.length; i++) {
+      data.push(random(zones[i], i + 1));
     }
 
+    this.save = function(cluster) {
+      return storageService.save(cluster, data);
+    };
+
+    this.getZones = function() {
+      var deferred = $q.defer();
+      $timeout(function () {
+        //note, the server passes the information about the data set size
+        deferred.resolve({
+          data: zones
+        });
+      }, 150);
+
+      return deferred.promise;
+    };
+
     this.getEmpty = function() {
-		return {
+      return {
         'id': null,
-        'active': true,
         'name': null,
-        'role': null,
-        'ip': null,
-        'type': null,
-        'az': a,
+        'zone': null,
         'createdDate': new Date()
       };
     };
 
     this.findOne = function(id) {
-	  var deferred = $q.defer();
+      var deferred = $q.defer();
 
       var filtered = $filter('filter')(data, function(item) {
         return item.id === parseInt(id);
@@ -65,7 +71,7 @@
     };
 
     this.findAll = function() {
-    	return data;
+      return data;
     };
 
     //fake call to the server, normally this service would serialize table state to send it to the server (with query parameters for example) and parse the response
