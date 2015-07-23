@@ -9,9 +9,9 @@
   function ClusterEditController($stateParams, $timeout, toastr, clustersService) {
     var vm = this;
 
-    vm.data       = null;
+    vm.data   = null;
     vm.origin = null;
-    vm.zones = [];
+    vm.zones  = [];
 
     function init() {
       vm.isLoading = true;

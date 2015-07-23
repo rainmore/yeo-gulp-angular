@@ -37,6 +37,10 @@
       data.push(random(i));
     }
 
+    this.getZones = function() {
+      return storageService.fakeDeffer(roles);
+    };
+
     this.save = function(server) {
       return storageService.save(server, data);
     };

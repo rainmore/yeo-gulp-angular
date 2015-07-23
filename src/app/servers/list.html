@@ -6,7 +6,7 @@
       <th st-sort="tenantId">IP</th>
       <th>Created</th>
       <th>Active</th>
-      <th>Actions</th>
+      <th><a ng-href="#/servers/add" title="Add"><i class="fa fa-plus fa-lg"></i></a></th>
     </thead>
     <tbody class="table-hover" ng-show="!ctrl.isLoading">
       <tr ng-repeat="server in ctrl.servers">
