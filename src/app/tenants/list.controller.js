@@ -6,7 +6,7 @@
     .controller('TenantsListController', TenantsListController);
 
   /** @ngInject */
-  function TenantsListController($timeout, toastr, tenantsService) {
+  function TenantsListController($timeout, alertService, tenantsService) {
     var vm = this;
 
     vm.tenants = [];
@@ -16,7 +16,8 @@
       var isNew = data.id === null;
       tenantsService.save(data).then(function(result) {
         vm.tenants = result.data;
-        toastr.success((isNew) ? "Added Successfully!" : "Updated Successfully!");
+        alertService.success((isNew) ? "Added Successfully!" : "Updated Successfully!");
+        alertService.success((isNew) ? "Added Successfully!" : "Updated Successfully!");
       });
     };
 

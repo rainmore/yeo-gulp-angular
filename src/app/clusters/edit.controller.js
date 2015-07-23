@@ -6,7 +6,7 @@
     .controller('ClusterEditController', ClusterEditController);
 
   /** @ngInject */
-  function ClusterEditController($stateParams, $timeout, toastr, clustersService) {
+  function ClusterEditController($stateParams, $timeout, clustersService, alertService) {
     var vm = this;
 
     vm.data   = null;
@@ -44,7 +44,7 @@
 
         vm.data = result.item;
         vm.origin = angular.copy(vm.data);
-        toastr.success((isNew) ? "Added Successfully!" : "Updated Successfully!");
+        alertService.success((isNew) ? "Added Successfully!" : "Updated Successfully!");
       });
     };
 

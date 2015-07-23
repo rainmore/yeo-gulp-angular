@@ -21,7 +21,9 @@
     };
 
     this.randomItemFromArray = function(data) {
-      if (data === null || data.length === 0) return null;
+      if (data === null || data.length === 0) {
+        return null;
+      }
       return data[Math.floor(Math.random() * data.length)];
     };
 

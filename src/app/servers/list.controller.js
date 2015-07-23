@@ -6,16 +6,15 @@
     .controller('ServersListController', ServersListController);
 
   /** @ngInject */
-  function ServersListController($timeout, serversService) {
+  function ServersListController($timeout, serversService, alertService) {
     var vm = this;
 
     vm.servers = [];
 
     vm.activate = function(data) {
       data.active = !data.active;
-      var isNew = data.id === null;
-      serversService.save(data).then(function(result) {
-        toastr.success("Updated Successfully!");
+      serversService.save(data).then(function() {
+        alertService.updated();
       });
     };
 

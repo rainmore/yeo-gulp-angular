@@ -6,7 +6,7 @@
     .controller('TenantsCertificateController', TenantsCertificateController);
 
   /** @ngInject */
-  function TenantsCertificateController($stateParams, $timeout, toastr, tenantsService) {
+  function TenantsCertificateController($stateParams, $timeout, tenantsService) {
     var vm = this;
 
     vm.tenant = null;
@@ -15,9 +15,6 @@
 
     function activate() {
       getTenant();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
     }
 
     function getTenant() {
