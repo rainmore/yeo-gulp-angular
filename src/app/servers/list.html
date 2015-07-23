@@ -16,7 +16,7 @@
         <td>{{server.createdDate}}</td>
         <td>{{server.active}}</td>
         <td>
-          <a ng-href="#/servers/{{server.id}}">Edit</a>
+          <a ng-href="#/servers/{{server.id}}" title="Edit"><i class="fa fa-edit fa-lg"></i></a>
         </td>
       </tr>
     </tbody>
@@ -25,7 +25,7 @@
         <td colspan="9" class="text-center">Loading ... </td>
       </tr>
     </tbody>
-    <tfoot>
+    <tfoot ng-show="!ctrl.isLoading">
       <tr>
         <td colspan="9" class="text-center">
           <div st-items-by-page="10" st-pagination="" st-template="app/components/pagination/paging.html"></div>

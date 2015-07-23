@@ -6,14 +6,14 @@
     .service('tenantsService', tenantsService);
 
   /** @ngInject */
-  function tenantsService ($q, $filter, $timeout, serversService, loremIpsumService)  {
-    var self = this;
+  function tenantsService ($q, $filter, $timeout, storageService, serversService, loremIpsumService)  {
+    var servers = [];
     var data = [];
 
     var random = function(id) {
       var name = 'stage' + loremIpsumService.randomText(5);
       var tag = loremIpsumService.randomItemFromArray(['7.2.0', '7.3.0', '7.4.0', '8.0.0', '8.1.0', '8.2.0']);
-      var server = loremIpsumService.randomItemFromArray(serversService.findAll());
+      var server = loremIpsumService.randomItemFromArray(servers);
 
       return {
         'id': id,
@@ -24,7 +24,7 @@
         'preferredUrl': null,
         'live': loremIpsumService.randomBoolean(),
         'tag': tag,
-        'createdDate': '2015-07-10 11:11:11',
+        'createdDate': new Date(),
         'rolloutgroup': 'dev',
         'db': {
           'hostname': 'localhost',
@@ -40,12 +40,20 @@
       };
     };
 
+    serversService.findAll().then(function(result) {
+      servers = result.data;
+    });
+
     for (var i = 1; i <= 1000; i++) {
       data.push(random(i));
     }
 
-    this.getEmpty = function(server) {
-      return {
+    this.save = function(tenant) {
+      return storageService.save(tenant, data);
+    };
+
+    this.getEmpty = function() {
+      var tenant = {
         'id': null,
         'active': null,
         'name': null,
@@ -62,89 +70,27 @@
           'user': null,
           'pass': null
         },
-        'server': server,
+        'server': null,
         't2': {
           'active': null,
           'rto': null
         }
       };
+
+      return storageService.fakeDeffer(tenant);
+    };
+
+
+    this.findOne = function(id) {
+      return storageService.findOne(id, data);
     };
 
     this.findAll = function() {
-      return data;
+      return storageService.findAll(data);
     };
 
-    //fake call to the server, normally this service would serialize table state to send it to the server (with query parameters for example) and parse the response
-    //in our case, it actually performs the logic which would happened in the server
     this.getPage = function (start, number, params) {
-
-      var deferred = $q.defer();
-
-      var filtered = params.search.predicateObject ? $filter('filter')(data, params.search.predicateObject) : data;
-
-      if (params.sort.predicate) {
-        filtered = $filter('orderBy')(filtered, params.sort.predicate, params.sort.reverse);
-      }
-
-      var result = filtered.slice(start, start + number);
-
-      $timeout(function () {
-        //note, the server passes the information about the data set size
-        deferred.resolve({
-          data: result,
-          numberOfPages: Math.ceil(data.length / number)
-        });
-      }, 1000);
-
-
-      return deferred.promise;
-    };
-
-    this.findOne = function(id) {
-      var deferred = $q.defer();
-
-      var filtered = $filter('filter')(self.findAll(), function(tenant) {
-        return tenant.id === parseInt(id);
-      });
-
-      var result = (filtered.length === 1) ? filtered[0] : null;
-
-      $timeout(function () {
-        //note, the server passes the information about the data set size
-        deferred.resolve({
-          data: result
-        });
-      }, 150);
-
-      return deferred.promise;
-    };
-
-    this.refresh = function() {
-      var deferred = $q.defer();
-
-      console.log('refreshed all');
-
-      $timeout(function () {
-        //note, the server passes the information about the data set size
-        deferred.resolve({
-          data: "Well done"
-        });
-      }, 150);
-
-      return deferred.promise;
-    };
-
-    this.refreshById = function(id) {
-      var deferred = $q.defer();
-
-      $timeout(function () {
-        //note, the server passes the information about the data set size
-        deferred.resolve({
-          data: "Tenant: " + id + " refreshed"
-        });
-      }, 150);
-
-      return deferred.promise;
+      return storageService.findPage(start, number, params, data);
     };
   }
 

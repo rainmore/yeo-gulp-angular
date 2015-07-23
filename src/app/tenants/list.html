@@ -37,8 +37,9 @@
           </a>
         </td>
         <td>
-          <a ng-href="#/tenants/{{tenant.id}}/certificate" title="Certificate"><i class="fa fa-certificate fa-lg"></i></a>
-          <a ng-href="#/tenants/{{tenant.id}}/refresh" title="Refresh"><i class="fa fa-refresh fa-lg"></i></a>
+          <a ng-href="#/tenants/{{tenant.id}}/certificate" title="Certificate"><i class="fa fa-certificate fa-lg"></i></a>&nbsp;
+          <a ng-href="#/tenants/{{tenant.id}}/refresh" title="Refresh"><i class="fa fa-refresh fa-lg"></i></a>&nbsp;
+          <a ng-href="#/tenants/{{tenant.id}}" title="Edit"><i class="fa fa-edit fa-lg"></i></a>
         </td>
       </tr>
     </tbody>
@@ -47,7 +48,7 @@
         <td colspan="9" class="text-center">Loading ... </td>
       </tr>
     </tbody>
-    <tfoot>
+    <tfoot ng-show="!ctrl.isLoading">
       <tr>
         <td colspan="9" class="text-center">
           <div st-items-by-page="10" st-pagination="" st-template="app/components/pagination/paging.html"></div>
