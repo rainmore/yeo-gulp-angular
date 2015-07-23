@@ -7,7 +7,6 @@
 
   /** @ngInject */
   function serversService($q, $filter, $timeout, clustersService, loremIpsumService)  {
-  	var self = this;
     var roles = ["Application", "Chancellor", "Database", "Steward"];
   	var data = [];
 
@@ -25,7 +24,7 @@
         'type': 'EC2',
          'az': loremIpsumService.randomItemFromArray(['a', 'b']),
         'createdDate': new Date()
-      };;
+      };
     };
 
     for (var i = 1; i <= 10; i++) {
@@ -40,7 +39,7 @@
         'role': null,
         'ip': null,
         'type': null,
-        'az': a,
+        'az': 'a',
         'createdDate': new Date()
       };
     };

@@ -39,9 +39,12 @@
     init();
 
     vm.save = function(clutser) {
+      var isNew = clutser.id === null;
       clustersService.save(clutser).then(function(result) {
+
         vm.data = result.item;
         vm.origin = angular.copy(vm.data);
+        toastr.success((isNew) ? "Added Successfully!" : "Updated Successfully!");
       });
     };
 
