@@ -7,4 +7,5 @@
     .constant('toastr', toastr)
     .constant('moment', moment);
 
+
 })();

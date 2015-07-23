@@ -19,7 +19,6 @@
       var filtered = $filter('filter')(lists, function(item) {
         return item.id === parseInt(id);
       });
-
       return (filtered.length === 1) ? filtered[0] : null;
     };
 
@@ -113,6 +112,7 @@
 
       return deferred.promise;
     };
+
   }
 
 })();

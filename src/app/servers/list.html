@@ -2,6 +2,7 @@
   <table class="table table-hover table-striped" st-pipe="ctrl.getPage" st-table="ctrl.displayed">
     <thead>
       <th st-sort="id">#</th>
+      <th st-sort="name">Cluster</th>
       <th st-sort="name">Name</th>
       <th st-sort="tenantId">IP</th>
       <th>Created</th>
@@ -11,10 +12,18 @@
     <tbody class="table-hover" ng-show="!ctrl.isLoading">
       <tr ng-repeat="server in ctrl.servers">
         <td>{{server.id}}</td>
+        <td>
+          {{server.cluster.name}}
+        </td>
         <td>{{server.name}}</td>
         <td>{{server.ip}}</td>
         <td>{{server.createdDate}}</td>
-        <td>{{server.active}}</td>
+        <td>
+          <a ng-click="ctrl.activate(server)">
+            <i ng-if="server.active" class="fa fa-check fa-lg" title="Activate"></i>
+            <i ng-if="!server.active" class="fa fa-times fa-lg" title="Disable"></i>
+          </a>
+        </td>
         <td>
           <a ng-href="#/servers/{{server.id}}" title="Edit"><i class="fa fa-edit fa-lg"></i></a>
         </td>

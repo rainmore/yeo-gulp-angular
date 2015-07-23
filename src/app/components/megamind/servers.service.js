@@ -11,6 +11,17 @@
   	var data = [];
     var clusters = [];
 
+    clustersService.findAll().then(function(result) {
+      clusters = result.data;
+
+      for (var i = 1; i <= 10; i++) {
+        data.push(random(i));
+      }
+
+    });
+
+
+
     var random = function(id) {
       var name = loremIpsumService.randomItemFromArray(['AU', 'US', 'EU', 'ASIA']);
     	name += loremIpsumService.randomItemFromArray([1, 2, 3, 4, 5]);
@@ -28,14 +39,6 @@
         'createdDate': new Date()
       };
     };
-
-    clustersService.findAll().then(function(result) {
-      clusters = result.data;
-    });
-
-    for (var i = 1; i <= 10; i++) {
-      data.push(random(i));
-    }
 
     this.getZones = function() {
       return storageService.fakeDeffer(roles);

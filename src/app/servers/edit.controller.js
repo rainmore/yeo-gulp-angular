@@ -6,7 +6,7 @@
     .controller('ServerEditController', ServerEditController);
 
   /** @ngInject */
-  function ServerEditController($stateParams, toastr, serversService, clustersService) {
+  function ServerEditController($stateParams, toastr, $alert, storageService, serversService, clustersService) {
     var vm = this;
 
     vm.data     = null;
@@ -45,15 +45,15 @@
 
     vm.save = function(data) {
       var isNew = data.id === null;
-      console.log(data);
       serversService.save(data).then(function(result) {
-
         vm.data = result.item;
         vm.origin = angular.copy(vm.data);
         toastr.success((isNew) ? "Added Successfully!" : "Updated Successfully!");
       });
     };
 
+
+    console.log($alert);
     vm.reset = function() {
       vm.data = angular.copy(vm.origin);
     };

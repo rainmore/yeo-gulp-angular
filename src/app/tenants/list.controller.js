@@ -6,13 +6,18 @@
     .controller('TenantsListController', TenantsListController);
 
   /** @ngInject */
-  function TenantsListController($timeout, tenantsService) {
+  function TenantsListController($timeout, toastr, tenantsService) {
     var vm = this;
 
     vm.tenants = [];
 
-    vm.activate = function(tenant) {
-      tenant.active = !tenant.active;
+    vm.activate = function(data) {
+      data.active = !data.active;
+      var isNew = data.id === null;
+      tenantsService.save(data).then(function(result) {
+        vm.tenants = result.data;
+        toastr.success((isNew) ? "Added Successfully!" : "Updated Successfully!");
+      });
     };
 
     vm.callServer = function (tableState) {

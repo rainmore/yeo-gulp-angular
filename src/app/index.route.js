@@ -55,6 +55,16 @@
           label: 'Servers'
         }
       })
+      .state('serversAdd', {
+        url: '/servers/add',
+        templateUrl: 'app/servers/edit.html',
+        controller: 'ServerEditController',
+        controllerAs: 'ctrl',
+        ncyBreadcrumb: {
+          parent: 'servers',
+          label: 'Add Server'
+        }
+      })
       .state('serversEdit', {
         url: '/servers/{id:int}',
         templateUrl: 'app/servers/edit.html',

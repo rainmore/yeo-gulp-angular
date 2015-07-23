@@ -11,6 +11,14 @@
 
     vm.servers = [];
 
+    vm.activate = function(data) {
+      data.active = !data.active;
+      var isNew = data.id === null;
+      serversService.save(data).then(function(result) {
+        toastr.success("Updated Successfully!");
+      });
+    };
+
     vm.getPage = function (tableState) {
       vm.isLoading = true;
       var pagination = tableState.pagination;
