@@ -16,26 +16,28 @@
         'title':     title,
         'content':   message,
         'type':      type,
+        'duration':  3,
         'container': '#alerts-container'
       });
       alert.$promise.then(alert.show);
       alerts.push(alert);
+      return self;
     };
 
     this.info = function(message, title) {
-      handler(message, title, 'info');
+      return handler(message, title, 'info');
     };
 
     this.success = function(message, title) {
-      handler(message, title, 'success');
+      return handler(message, title, 'success');
     };
 
     this.warn = function(message, title) {
-      handler(message, title, 'warning');
+      return handler(message, title, 'warning');
     };
 
     this.error = function(message, title) {
-      handler(message, title, 'danger');
+      return handler(message, title, 'danger');
     };
 
     this.close = function() {
@@ -45,25 +47,24 @@
         });
         alerts = [];
       }
+      return self;
     };
 
 
     // helpers
     this.saved = function(isNew) {
       if (isNew) {
-        self.added();
+        return self.added();
       }
-      else {
-        self.updated();
-      }
+      return self.updated();
     };
 
     this.updated = function() {
-      self.success('Updated Successfully');
+      return self.success('Updated Successfully');
     };
 
     this.added = function() {
-      self.success('Added Successfully');
+      return self.success('Added Successfully');
     };
   }
 

@@ -48,7 +48,7 @@
       serversService.save(data).then(function(result) {
         vm.data = result.item;
         vm.origin = angular.copy(vm.data);
-        alertService.saved(isNew);
+        alertService.close().saved(isNew);
       });
     };
 
