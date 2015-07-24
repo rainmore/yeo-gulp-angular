@@ -52,6 +52,10 @@
       return storageService.findAll(data);
     };
 
+    this.all = function() {
+      return data;
+    };
+
     this.getPage = function (start, number, params) {
       return storageService.findPage(start, number, params, data);
     };

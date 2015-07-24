@@ -1,4 +1,5 @@
 <nav class="navbar navbar-static-top navbar-inverse">
+
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" ng-href="#" title="Home">
@@ -8,16 +9,13 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
       <ul class="nav navbar-nav">
-        <li><a ng-href="#/clusters">Clusters</a></li>
-        <li><a ng-href="#/servers">Servers</a></li>
-        <li><a ng-href="#/tenants">Tenants</a></li>
+        <li ng-class="{active: ctrl.isActive('clusters')}"><a ng-href="#/clusters">Clusters</a></li>
+        <li ng-class="{active: ctrl.isActive('servers')}"><a ng-href="#/servers">Servers</a></li>
+        <li ng-class="{active: ctrl.isActive('tenants')}"><a ng-href="#/tenants">Tenants</a></li>
         <li><a ng-click="vm.refrashTenants()">Refresh</a></li>
         <li><a ng-href="#">Logout</a></li>
       </ul>
 
-      <!--<ul class="nav navbar-nav navbar-right acme-navbar-text">-->
-        <!--<li>Application was created {{ vm.relativeDate }}.</li>-->
-      <!--</ul>-->
     </div>
   </div>
 </nav>

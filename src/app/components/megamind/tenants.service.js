@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function tenantsService ($q, $filter, $timeout, storageService, serversService, loremIpsumService)  {
-    var servers = [];
+    var servers = serversService.allApplications();
     var data = [];
 
     var random = function(id) {
@@ -40,11 +40,7 @@
       };
     };
 
-    serversService.findAll().then(function(result) {
-      servers = result.data;
-    });
-
-    for (var i = 1; i <= 1000; i++) {
+    for (var i = 1; i <= 100; i++) {
       data.push(random(i));
     }
 

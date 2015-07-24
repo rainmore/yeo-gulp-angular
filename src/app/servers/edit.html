@@ -1,6 +1,7 @@
+<h2 ng-if="ctrl.data.id != null">Edit Server</h2>
+<h2 ng-if="ctrl.data.id == null">Add Server</h2>
 <form class="form-horizontal" novalidate>
   <fieldset>
-    <legend>APP Certificate</legend>
     <div class="form-group" ng-if="ctrl.data.id != null">
       <label class="col-sm-2 control-label">ID</label>
       <div class="col-sm-10">
@@ -10,7 +11,7 @@
     <div class="form-group">
       <label for="cluster" class="col-sm-2 control-label">Cluster: </label>
       <div class="col-sm-10">
-        <select id="cluster" required class="form-control" ng-options="item.name for item in ctrl.clusters" ng-model="ctrl.data.cluster">
+        <select id="cluster" required class="form-control" ng-options="item.id as item.name for item in ctrl.clusters" ng-model="ctrl.data.cluster.id">
           <option value="">-- Select Cluster --</option>
         </select>
       </div>

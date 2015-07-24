@@ -4,7 +4,7 @@
   angular
     .module('webupdateNg', [
       'ngResource',
-      'ui.router',
+      'ngRoute',
       'smart-table',
       'mgcrea.ngStrap',
       'ncy-angular-breadcrumb'

@@ -1,0 +1,116 @@
+<h2 ng-if="ctrl.data.id != null">Edit Server</h2>
+<h2 ng-if="ctrl.data.id == null">Add Server</h2>
+<form class="form-horizontal" novalidate>
+  <fieldset>
+    <div class="form-group" ng-if="ctrl.data.id != null">
+      <label class="col-sm-2 control-label">ID</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">{{ctrl.data.id}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="cluster" class="col-sm-2 control-label">Server: </label>
+      <div class="col-sm-10">
+        <select id="cluster" required class="form-control" ng-options="item.id as item.name for item in ctrl.servers" ng-model="ctrl.data.server.id">
+          <option value="">-- Select Server --</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="role" class="col-sm-2 control-label">Rollout Group: </label>
+      <div class="col-sm-4">
+        <select id="role" required class="form-control" ng-options="item for item in ctrl.rolloutgroup" ng-model="ctrl.data.rolloutgroup">
+          <option value="">-- Select Rollout Group --</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Name: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" ng-model="ctrl.data.name" id="name" maxlength="255" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Tenant ID: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" ng-model="ctrl.data.tenantId" id="tenantId" maxlength="255" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Preferred Url: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" ng-model="ctrl.data.preferredUrl" id="preferredUrl" maxlength="255" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Tag: </label>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" ng-model="ctrl.data.tag" id="tag" maxlength="255" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="active" class="col-sm-2 control-label">Status: </label>
+      <div class="col-sm-10">
+        <input type="checkbox" name="active" id="active" ng-model="ctrl.data.active"  />
+      </div>
+    </div>
+    <div class="form-group" ng-if="ctrl.data.id != null">
+      <label class="col-sm-2 control-label">Created Date</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">{{ctrl.data.createdDate}}</p>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Database</legend>
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Host: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" ng-model="ctrl.data.database.host" id="database-host" maxlength="255" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Name: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" ng-model="ctrl.data.database.name" id="database-name" maxlength="255" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Username: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" ng-model="ctrl.data.database.user" id="database-user" maxlength="255" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Password: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" ng-model="ctrl.data.database.pass" id="database-pass" maxlength="255" required />
+      </div>
+    </div>
+  </fieldset>
+  <!--<fieldset>-->
+    <!--<legend>T2</legend>-->
+    <!--<div class="form-group">-->
+      <!--<label for="name" class="col-sm-2 control-label">T2 Status: </label>-->
+      <!--<div class="col-sm-4">-->
+        <!--<input type="checkbox" ng-model="ctrl.data.t2.active" id="t2-active" maxlength="255" required />-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+      <!--<label for="name" class="col-sm-2 control-label">Password: </label>-->
+      <!--<div class="col-sm-4">-->
+        <!--<input type="checkbox" ng-model="ctrl.data.t2.rto" id="t2-rto" maxlength="255" required />-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</fieldset>-->
+  <fieldset>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">&nbsp;</label>
+      <div class="col-sm-10">
+        <button class="btn btn-primary" ng-click="ctrl.save(ctrl.data)">Save</button>
+        <button class="btn btn-primary" ng-click="ctrl.reset()">Reset</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+

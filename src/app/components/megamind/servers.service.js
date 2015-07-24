@@ -7,19 +7,17 @@
 
   /** @ngInject */
   function serversService($q, $filter, $timeout, storageService, clustersService, loremIpsumService)  {
-    var roles = ["Application", "Chancellor", "Database", "Steward"];
+    var self = this;
+    this.Role = {
+      Application: "Application",
+      Chancellor: "Chancellor",
+      Database: "Database",
+      Steward: "Steward"
+    };
+
+    var roles = [self.Role.Application, self.Role.Chancellor, self.Role.Database, self.Role.Steward];
   	var data = [];
     var clusters = [];
-
-    clustersService.findAll().then(function(result) {
-      clusters = result.data;
-
-      for (var i = 1; i <= 10; i++) {
-        data.push(random(i));
-      }
-
-    });
-
 
 
     var random = function(id) {
@@ -38,6 +36,18 @@
          'az': loremIpsumService.randomItemFromArray(['a', 'b']),
         'createdDate': new Date()
       };
+    };
+
+    clusters = clustersService.all();
+
+    for (var i = 1; i <= 10; i++) {
+      data.push(random(i));
+    }
+
+    this.allApplications = function() {
+      return $filter('filter')(data, function(item) {
+        return item.role === self.Role.Application;
+      });
     };
 
     this.getZones = function() {
@@ -71,6 +81,13 @@
 
     this.findAll = function() {
       return storageService.findAll(data);
+    };
+
+    this.findByRole = function(role) {
+      var filter = $filter('filter')(data, function(item) {
+        return item.role === role;
+      });
+      return storageService.fakeDeffer(filter);
     };
 
     this.getPage = function (start, number, params) {

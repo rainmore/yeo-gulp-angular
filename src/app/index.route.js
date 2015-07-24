@@ -85,12 +85,33 @@
         }
       })
       .state('tenantsView', {
-       url: '/tenants/{id:int}',
-       controller: 'TenantsViewController',
-       controllerAs: 'ctrl',
+        url: '/tenants/{id:int}/view',
+        templateUrl: 'app/tenants/edit.html',
+        controller: 'TenantsEditController',
+        controllerAs: 'ctrl',
         ncyBreadcrumb: {
           parent: 'tenants',
           label: 'View Tenant'
+        }
+      })
+      .state('tenantsEdit', {
+        url: '/tenants/{id:int}',
+        templateUrl: 'app/tenants/edit.html',
+        controller: 'TenantsEditController',
+        controllerAs: 'ctrl',
+        ncyBreadcrumb: {
+          parent: 'tenants',
+          label: 'Edit Tenant'
+        }
+      })
+      .state('tenantsAdd', {
+        url: '/tenants/add',
+        templateUrl: 'app/tenants/edit.html',
+        controller: 'TenantsEditController',
+        controllerAs: 'ctrl',
+        ncyBreadcrumb: {
+          parent: 'tenants',
+          label: 'Add Tenant'
         }
       })
       .state('tenantsCertificate', {
